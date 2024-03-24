@@ -1,4 +1,5 @@
-export interface itemNav {
+export interface itemSidebar {
     path: string,
-    text: string
+    text: string,
+    icon: JSX.Element
 }
