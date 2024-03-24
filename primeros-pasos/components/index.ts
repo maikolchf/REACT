@@ -1,6 +1,5 @@
 // exportamos los componentes que creemos
-
-export * from './navbar/Navbar';
+export { Sidebar} from './sideBar/Sidebar'
 
 //Componentes del lado del cliente
-export { ActiveLink } from './active-link/ActiveLink'
+export * from './sideBar/ActiveSidebarItem.module.css'

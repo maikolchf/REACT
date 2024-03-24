@@ -1,15 +1,20 @@
-import { Navbar } from "@/components";
+import { Sidebar } from "@/components";
 
 export default function GeneralLayout({
- children
+  children
 }: {
- children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <>      
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <span className="text-7xl"> {children} </span>
-      </main>
+    <>
+      <>
+        <Sidebar></Sidebar>
+        <div className="flex flex-wrap ml-9">
+            <div className="h-full w-full max-w-full sm:w-1/4 mx-auto bg-white">
+                {children}
+            </div>
+        </div>
+      </>
     </>
   );
 }
