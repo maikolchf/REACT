@@ -7,7 +7,7 @@ export const metadata = {
 export default function ContactPage(){
     return(
         <>
-            <span>Contact Page</span>
+            <span>Pagina de partidos registrados</span>
         </>
     )
 }
