@@ -7,14 +7,14 @@ export default function GeneralLayout({
 }) {
   return (
     <>
-      <>
+      <div className="container flex flex-col mx-auto bg-white">
         <Sidebar></Sidebar>
-        <div className="flex flex-wrap ml-9">
-            <div className="h-full w-full max-w-full sm:w-1/4 mx-auto bg-white">
-                {children}
-            </div>
+        <div className="flex ml-9">
+          <div className="w-full max-w-full sm:w-1/4 mx-auto bg-white">
+            {children}
+          </div>
         </div>
-      </>
+      </div>
     </>
   );
 }
