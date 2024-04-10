@@ -6,15 +6,17 @@ export default function GeneralLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <div className="container flex flex-col mx-auto bg-white">
-        <Sidebar></Sidebar>
-        <div className="flex ml-9">
-          <div className="w-full max-w-full sm:w-1/4 mx-auto bg-white">
-            {children}
-          </div>
+    <div className="bg-slate-100 overflow-y-scroll w-screen h-screen antialiased text-slate-300 selection:bg-blue-600 selection:text-white">
+
+      <div className="flex">
+
+        <Sidebar />
+
+        <div className="w-full text-slate-900">
+          { children }
         </div>
+
       </div>
-    </>
+    </div>
   );
 }
