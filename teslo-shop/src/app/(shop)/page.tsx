@@ -1,6 +1,10 @@
 import { Title } from "@/components";
-import { titleFonts } from "@/config/fonts";
-import Image from "next/image";
+import { initialData } from "@/seed/seed";
+import { ProductGrid } from '../../components/products/product-grid/ProductGrid';
+
+
+
+const products = initialData.products;
 
 export default function Home() {
   return (
@@ -10,6 +14,11 @@ export default function Home() {
         subtitle="Todos los productos"
         className="mb-2"
       />
+
+      <ProductGrid 
+        products={products}
+      />
+
     </>
   );
 }
