@@ -29,8 +29,6 @@ export default function ProductPage({ params }: Props) {
         </h1>
         <p className="text-lg mb-5"> ${product.price} </p>
 
-
-
         <button className="btn-primary my-5">
           Agregar al carrito
         </button>
