@@ -1,6 +1,6 @@
-import { Title } from "@/components";
+import { ProductGrid, Title } from "@/components";
 import { initialData } from "@/seed/seed";
-import { ProductGrid } from '../../components/products/product-grid/ProductGrid';
+
 
 
 
