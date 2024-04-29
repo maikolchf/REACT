@@ -1,3 +1,4 @@
+import { ProductMobileSlidesShow, ProductSlidesShow, QuatitySelector, SizeSelector } from "@/components";
 import { titleFonts } from "@/config/fonts";
 import { initialData } from "@/seed/seed";
 import { notFound } from "next/navigation";
@@ -21,6 +22,18 @@ export default function ProductPage({ params }: Props) {
   return (
     <div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
       <div className="col-span-1 md:col-span-2">
+        {/* Escritorio */}
+        <ProductSlidesShow
+          title={product.title}
+          images={product.images}
+          className="hidden md:block"
+        />
+        {/* Movil */}
+        <ProductMobileSlidesShow
+          title={product.title}
+          images={product.images}
+          className="block md:hidden"
+        />
 
       </div>
       <div className="col-span-1 px-5">
@@ -28,6 +41,17 @@ export default function ProductPage({ params }: Props) {
           {product.title}
         </h1>
         <p className="text-lg mb-5"> ${product.price} </p>
+
+        {/* Selector de tallas */}
+        <SizeSelector
+          selectdSize={product.sizes[0]}
+          availableSize={product.sizes}
+        />
+
+        {/* Cantidades */}
+        <QuatitySelector
+          quantity={1}
+        />
 
         <button className="btn-primary my-5">
           Agregar al carrito
