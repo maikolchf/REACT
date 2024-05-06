@@ -2,7 +2,6 @@ import { Title, QuatitySelector } from "@/components";
 import { initialData } from "@/seed/seed";
 import Link from "next/link";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 
 const productsInCart = [
   initialData.products[0],
@@ -10,22 +9,18 @@ const productsInCart = [
   initialData.products[2],
 ];
 
-export default function CardPage() {
-
-  if(productsInCart.length === 0)
-  redirect("/empty")
-
+export default function CheckoutPage() {
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">
-        <Title title="Carrito" />
+        <Title title="Verificar orden" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
           {/* Carrito */}
           <div className="flex flex-col mt-5">
-            <span className="text-xl">Agregar más items</span>
-            <Link href="/" className="underline mb-5">
-              Continúa comprando
+            <span className="text-xl">Elementos en carrito</span>
+            <Link href="/cart" className="underline mb-5">
+              Editar carrito
             </Link>
 
             {/* Items */}
@@ -46,7 +41,8 @@ export default function CardPage() {
                 <div>
                   <p>{product.title}</p>
                   <p>${product.price}</p>
-                  <QuatitySelector quantity={3} />
+                  <p>x 3</p>
+                  <p className=" font-bold">Subtotal: ${product.price * 3}</p>
 
                   <button className="underline mt-3">Remover</button>
                 </div>
@@ -56,7 +52,19 @@ export default function CardPage() {
 
           {/*Resumen de orden */}
           <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
-            <h2 className="text-2xl mb-2">Resumen de orden</h2>
+            <h2 className="text-2xl mb-2 font-bold">Dirección de entrega:</h2>
+            <div className="mb-10">
+              <p className="text-xl">Michael Chavarría Flores</p>
+              <p>xxxxxxxxxxxxxxxxxxxx</p>
+              <p>xxxxxxxxxxxxxxxxxxx</p>
+              <p>xxxxxxxxxxxxxxxxxx</p>
+              <p>xxxxxxxxxxxxxxxxx</p>
+              <p>xxxxxxxxxxxxxxxx</p>
+              <p>xxxxxxxxxxxxxxx</p>
+            </div>
+
+            <div className="w-full h-0.5 rounded bg-gray-200 mb-10"></div>
+            <h2 className="text-2xl mb-2 font-bold">Resumen de orden</h2>
 
             <div className="grid grid-cols-2">
               <span>No. Productos</span>
@@ -73,11 +81,20 @@ export default function CardPage() {
             </div>
 
             <div className="mt-5 mb-2 w-full">
+
+              <div className="mt-5 mb-2 w-full">
+                <span className="text-xs">
+                  Al hacer clic en "Colocar orden", acepta nuestros <a href="#" className="underline">
+                       términos y condiciones </a> y <a href="#" className="underline">
+                    política de privacidad
+                  </a>.
+                </span>
+              </div>
               <Link
                 className="flex btn-primary justify-center"
-                href="/checkout/address"
+                href="/orders/123"
               >
-                Checkout
+                Colocar orden
               </Link>
             </div>
           </div>
