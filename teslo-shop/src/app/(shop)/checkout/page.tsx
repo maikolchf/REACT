@@ -84,7 +84,7 @@ export default function CheckoutPage() {
 
               <div className="mt-5 mb-2 w-full">
                 <span className="text-xs">
-                  Al hacer clic en "Colocar orden", acepta nuestros <a href="#" className="underline">
+                  Al hacer clic en &quot;Colocar orden&quot;, acepta nuestros <a href="#" className="underline">
                        términos y condiciones </a> y <a href="#" className="underline">
                     política de privacidad
                   </a>.

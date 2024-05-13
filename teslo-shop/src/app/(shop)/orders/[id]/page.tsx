@@ -16,7 +16,7 @@ interface Props {
   };
 }
 
-export default function ({ params }: Props) {
+export default function OrderIdPage({ params }: Props) {
   const { id } = params;
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
