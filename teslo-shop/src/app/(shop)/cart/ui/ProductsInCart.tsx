@@ -1,6 +1,6 @@
 "use client";
 
-import { QuatitySelector } from "@/components";
+import { QuatitySelector, Spinner } from "@/components";
 import { useCartStore } from "@/store";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,14 +8,17 @@ import React, { useEffect, useState } from "react";
 
 export const ProductsInCart = () => {
   const productsInCart = useCartStore((state) => state.cart);
-
+  const updateProductQuantity = useCartStore(
+    (state) => state.updateProductQuantity
+  );
+  const removeProduct = useCartStore((state) => state.removeProduct);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setLoaded(true);
   }, []);
 
-  if (!loaded) return <p>cargando...</p>;
+  if (!loaded) return <Spinner/>
 
   return (
     <>
@@ -34,17 +37,22 @@ export const ProductsInCart = () => {
           />
 
           <div>
-            <Link 
-            className="hover:underline cursor-pointer"
-            href={`/product/${product.slug}`}>{product.title}</Link>
+            <Link
+              className="hover:underline cursor-pointer"
+              href={`/product/${product.slug}`}
+            >
+              {product.title}
+            </Link>
             <p>Talla: {product.size}</p>
             <p>${product.price}</p>
             <QuatitySelector
-              quantity={3}
+              quantity={product.quantity}
               inStock={product.inStock}
-              onQuantityChanged={(value) => console.log(value)}
+              onQuantityChanged={(quantity) =>
+                updateProductQuantity(product, quantity)
+              }
             />
-            <button className="underline mt-3">Remover</button>
+            <button className="underline mt-3" onClick={ () => removeProduct(product)}>Remover</button>
           </div>
         </div>
       ))}

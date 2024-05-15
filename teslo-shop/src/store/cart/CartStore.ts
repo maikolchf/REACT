@@ -1,4 +1,5 @@
-import type { CartProducts } from "@/interfaces";
+import type { CartProducts, SummaryInformation } from "@/interfaces";
+import { totalmem } from "os";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -6,8 +7,9 @@ interface State {
   cart: CartProducts[];
   addProductToCart: (product: CartProducts) => void;
   getTotalItems: () => number;
-  //updateProductQuantity:
-  //removeProduct:
+  updateProductQuantity: (product: CartProducts, quantity: number) => void;
+  removeProduct: (product: CartProducts) => void;
+  getSummaryInformation: () => SummaryInformation;
 }
 
 export const useCartStore = create<State>()(
@@ -37,6 +39,49 @@ export const useCartStore = create<State>()(
       getTotalItems: () => {
         const { cart } = get();
         return cart.reduce((total, item) => total + item.quantity, 0);
+      },
+      updateProductQuantity: (product: CartProducts, quantity: number) => {
+        const { cart } = get();
+
+        const updateProductInCart = cart.map((item) => {
+          if (item.id === product.id && item.size === product.size)
+            return { ...item, quantity: quantity };
+
+          return item;
+        });
+
+        set({ cart: updateProductInCart });
+      },
+      removeProduct: (product: CartProducts) => {
+        const { cart } = get();
+
+        const filterProductInCart = cart.filter((item) => {
+          if (item.id !== product.id || item.size !== product.size)
+            return { ...item };
+        });
+
+        set({ cart: filterProductInCart });
+      },
+      getSummaryInformation: () => {
+        const { cart } = get();
+
+        const subTotal = cart.reduce(
+          (subTotal, product) => product.quantity * product.price + subTotal,
+          0
+        );
+        const iva = subTotal * 0.15;
+        const total = subTotal + iva;
+        const itemsInCart = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+
+        return{
+          subTotal,
+          iva,
+          total,
+          itemsInCart
+        }
       },
     }),
     {
