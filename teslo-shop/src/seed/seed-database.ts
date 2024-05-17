@@ -4,11 +4,17 @@ import { create } from "zustand";
 
 async function main() {
   //Borramos la data
-  await prisma.product.deleteMany();
+  await prisma.user.deleteMany();
   await prisma.productImage.deleteMany();
+  await prisma.product.deleteMany();
   await prisma.category.deleteMany();
 
-  const { categories, products } = initialData;
+  const { categories, products, users } = initialData;
+
+//usuarios
+  await prisma.user.createMany({
+    data:users
+  });
 
 //Categorias
   const categoriesData = categories.map((name) => ({ name }));
