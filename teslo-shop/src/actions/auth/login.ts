@@ -14,9 +14,28 @@ export async function authenticate(
 
     return "Success";
   } catch (error) {
-    if ((error as any).type === "CredentialsSignin") 
+    if ((error as any).type === "CredentialsSignin")
       return "CredentialsSignin";
 
     return "UnknownError";
+  }
+}
+
+
+export const login = async (email: string, password: string) => {
+  try {
+    await signIn('credentials', { email, password , redirect: false,});
+
+    return {
+      ok: true,
+      message: 'logeado'
+    };
+
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false,
+      message: 'Ocurrio un error al iniciar sesión.'
+    }
   }
 }

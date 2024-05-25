@@ -1,19 +1,36 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { FormInputs } from '@/interfaces'
 import { useForm } from 'react-hook-form'
 import clsx from 'clsx'
+import { login, registerUser } from '@/actions'
 
 
 export const RegisterForm = () => {
 
-    const { register, handleSubmit, formState:{errors}} = useForm<FormInputs>()
+    const { register, handleSubmit, formState:{errors}} = useForm<FormInputs>();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onSubmit = async(data: FormInputs) => {
+        setErrorMessage('');
         const {email,name,password} = data;
-        console.log({email,name,password})
+
+        const respuesta = await registerUser(name,email,password)
+        if(!respuesta.ok){
+            setErrorMessage(respuesta.message);
+            return;
+        }
+
+        const resLogin = await login(email.toLowerCase(),password)
+
+        if(!resLogin.ok){
+            setErrorMessage(resLogin.message);    
+            return;
+        }
+
+        window.location.replace('/');
     }
 
     return (
@@ -51,7 +68,7 @@ export const RegisterForm = () => {
                 type="password"
                 {...register('password', {required: true})}
             />
-
+            <span className='text-red-600'>{errorMessage}</span>
             <button className="btn-primary">Guardar</button>
 
             {/* divisor l ine */}

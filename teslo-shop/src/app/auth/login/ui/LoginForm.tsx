@@ -18,7 +18,6 @@ export const LoginForm = () => {
     }
   }, [state]);
   
-  console.log(state)
 
   return (
     <>
