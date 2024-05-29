@@ -18,6 +18,10 @@ export const authConfig: NextAuthConfig = {
     session({token, session, user}){
       session.user = token.data as any;
       return session;
+    },
+    authorized({ auth, request: { nextUrl } }) {
+      console.log(auth);
+      return true;
     }
   },
   providers: [
