@@ -37,5 +37,10 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5"
-  }
+  },
+  "description": "1. Clonar el repositorio\r 2. Copiar ```.env.template```y renombrarlo por ```.env```\r 3. Cambiar variables de entorno en el archivo ```.env```\r 4. Ejecutar ```npm install``` => Instalar dependencias\r 5. Ejecutar ```docker compose up -d```=> Levantar la base de datos\r 6. Ejecutar ```npx prisma migrate dev``` => Migramos la DB\r 7. Ejecutar ```npm run seed``` => Cargamos la data a la DB\r 8. Ejecutar ```npm run dev``` => Ejecutamos el proyecto",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

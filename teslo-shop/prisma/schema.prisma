@@ -79,7 +79,7 @@ model User {
 model Country {
   id          String        @id
   name        String
-  //UserAddress UserAddress[]
+
   UserAddress UserAddress[]
 }
 
