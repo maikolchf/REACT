@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { FormInputs } from '@/interfaces'
+import { Auth } from '@/interfaces'
 import { useForm } from 'react-hook-form'
 import clsx from 'clsx'
 import { login, registerUser } from '@/actions'
@@ -10,10 +10,10 @@ import { login, registerUser } from '@/actions'
 
 export const RegisterForm = () => {
 
-    const { register, handleSubmit, formState:{errors}} = useForm<FormInputs>();
+    const { register, handleSubmit, formState:{errors}} = useForm<Auth>();
     const [errorMessage, setErrorMessage] = useState('');
 
-    const onSubmit = async(data: FormInputs) => {
+    const onSubmit = async(data: Auth) => {
         setErrorMessage('');
         const {email,name,password} = data;
 

@@ -1,5 +1,4 @@
-import type { CartProducts, SummaryInformation } from "@/interfaces";
-import { totalmem } from "os";
+import type { CartProducts, Cart } from "@/interfaces";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -9,7 +8,7 @@ interface State {
   getTotalItems: () => number;
   updateProductQuantity: (product: CartProducts, quantity: number) => void;
   removeProduct: (product: CartProducts) => void;
-  getSummaryInformation: () => SummaryInformation;
+  getSummaryInformation: () => Cart;
 }
 
 export const useCartStore = create<State>()(

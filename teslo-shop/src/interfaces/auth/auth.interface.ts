@@ -1,5 +1,5 @@
 
-export interface FormInputs {
+export interface Auth {
     name: string,
     email: string,
     password: string

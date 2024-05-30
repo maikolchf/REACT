@@ -1,6 +1,6 @@
 
 export * from './product.interface'
-export * from './cart/SummaryInformation'
-export * from './auth/FormInputs'
-export * from './address/FormInputsAddress'
+export * from './cart/cart.interface'
+export * from './auth/auth.interface'
+export * from './address/address.interface'
 export * from './country.interface'
