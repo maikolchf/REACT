@@ -1,12 +1,11 @@
 import { Title, QuatitySelector } from "@/components";
-import { initialData } from "@/seed/seed";
 import Link from "next/link";
-import Image from "next/image";
 import { ProductsInCart } from "./ui/ProductsInCart";
 import { PlaceOrder } from "./ui/PlaceOrder";
 
 
 export default function CheckoutPage() {
+
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
       <div className="flex flex-col w-[1000px]">

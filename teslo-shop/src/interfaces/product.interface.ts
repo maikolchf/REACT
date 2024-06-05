@@ -23,7 +23,14 @@ export interface CartProducts{
     inStock: number;
 }
 
+export interface ProductToOrder{
+    productId: string,
+    quantity: number,
+    size: Size
+}
+
 export type Size = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
 export type Type = 'shirts'|'pants'|'hoodies'|'hats';
 export type Category = 'men'|'women'|'kid'|'unisex';
+
 

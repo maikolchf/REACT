@@ -1,24 +1,29 @@
 'use client'
+import { placeOrder } from '@/actions';
 import { Spinner } from '@/components';
 import { useAddressStore, useCartStore } from '@/store';
 import { currencyFormat } from '@/utils';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 export const PlaceOrder = () => {
 
+    const router = useRouter();
     const [loaded, setLoaded] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [isPlacingOrder, setIsPlacingOrder] = useState(false);
     const address = useAddressStore(state => state.address);
     const getSummaryInformation = useCartStore((state) =>
         state.getSummaryInformation()
     );
     const cart = useCartStore(state => state.cart);
+    const clearCart = useCartStore(state => state.clearCart);
 
     useEffect(() => {
         setLoaded(true);
     }, []);
-
+  
     const onPlaceOrder = async () =>{
         setIsPlacingOrder(true);
         const productsInCart = cart.map(product => ({
@@ -26,12 +31,20 @@ export const PlaceOrder = () => {
             quantity: product.quantity,
             size: product.size,
         }));
-        console.log(address, productsInCart)
-
-        setIsPlacingOrder(false);
+        const result = await placeOrder(productsInCart,address);
+        console.log(result);
+        if(!result.ok){
+            setIsPlacingOrder(false);
+            setErrorMessage(result.message);
+            return;
+        }        
+        clearCart();
+        router.replace("/orders/"+ result.order?.id);
     };
-
+    console.log(cart);
     if (!loaded) return <Spinner />
+
+  
 
     return (
         <div className="bg-white rounded-xl shadow-xl p-7 h-fit">
@@ -79,8 +92,8 @@ export const PlaceOrder = () => {
                         </a>.
                     </span>
                 </div>
-
-                <p className='text-red-600'>Error al colocar orden.</p>
+                
+                <p className='text-red-600'>{errorMessage}</p>
                 <button
                     className={
                         clsx({
