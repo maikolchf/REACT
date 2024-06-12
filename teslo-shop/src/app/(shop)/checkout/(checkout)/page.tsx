@@ -1,4 +1,4 @@
-import { Title, QuatitySelector } from "@/components";
+import { Title } from "@/components";
 import Link from "next/link";
 import { ProductsInCart } from "./ui/ProductsInCart";
 import { PlaceOrder } from "./ui/PlaceOrder";
