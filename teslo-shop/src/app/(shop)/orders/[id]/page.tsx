@@ -97,7 +97,7 @@ export default async function OrderIdPage({ params }: Props) {
               <span className="mt-5 text-2xl text-right">{currencyFormat(result.order?.total ?? 0)}</span>
             </div>
             <div className="mt-5 mb-2 w-full">
-              <BtnPaypal order={result.order} />
+              <BtnPaypal/>
             </div>
 
           </div>
