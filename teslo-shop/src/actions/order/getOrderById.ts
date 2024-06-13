@@ -58,7 +58,7 @@ export const getOrderById = async (id: string) => {
   } catch (error) {
     return {
       ok: false,
-      message: 'Orden no existe'
+      message: 'Orden no existe',
     }
 
   }
