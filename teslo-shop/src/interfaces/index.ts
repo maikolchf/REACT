@@ -1,9 +1,10 @@
 
 export * from './product.interface'
-export * from './cart/cart.interface'
-export * from './auth/auth.interface'
-export * from './address/address.interface'
+export * from './cart.interface'
+export * from './auth.interface'
+export * from './address.interface'
 export * from './country.interface'
 export * from './order.interface'
 export * from './paypal.interface'
 export * from './Response.interface'
+export * from './users.interface'
