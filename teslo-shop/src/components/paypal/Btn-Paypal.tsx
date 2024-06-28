@@ -2,7 +2,7 @@
 import React from 'react'
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Spinner } from '@/components';
-import { CreateOrderActions, CreateOrderData, OnApproveData, OnApproveActions} from '@paypal/paypal-js'
+import { CreateOrderActions, CreateOrderData, OnApproveData, OnApproveActions } from '@paypal/paypal-js'
 import { paypalCheckPaymets, setTransactionId } from '@/actions';
 
 
@@ -11,7 +11,7 @@ interface Props {
   amount: number;
 }
 
-export const BtnPaypal = ({ orderId, amount } : Props) => {
+export const BtnPaypal = ({ orderId, amount }: Props) => {
 
   const [{ isPending }] = usePayPalScriptReducer();
 
@@ -21,8 +21,8 @@ export const BtnPaypal = ({ orderId, amount } : Props) => {
 
   if (isPending) return <Spinner></Spinner>
 
-  const createOrder = async(data: CreateOrderData, actions: CreateOrderActions): Promise<string> => {
-    
+  const createOrder = async (data: CreateOrderData, actions: CreateOrderActions): Promise<string> => {
+
     const transaccionID = await actions.order.create({
       intent: 'CAPTURE',
       purchase_units: [
@@ -36,30 +36,33 @@ export const BtnPaypal = ({ orderId, amount } : Props) => {
       ],
     });
 
-    const {ok, message} = await setTransactionId(transaccionID, orderId);
+    const { ok, message } = await setTransactionId(transaccionID, orderId);
 
-    if(!ok){
+    if (!ok) {
       throw new Error(message);
     }
 
     return transaccionID;
   };
-  const onApprove = async(data: OnApproveData, actions: OnApproveActions) => { 
+  const onApprove = async (data: OnApproveData, actions: OnApproveActions) => {
 
     const details = await actions.order?.capture();
 
-    if(!details) return;
+    if (!details) return;
 
-    const checkPayment = await paypalCheckPaymets( details.id! );    
+    const checkPayment = await paypalCheckPaymets(details.id!);
 
   }
 
   return (
-    <>        
+    <>
+      <div className='relative z-0'>
         <PayPalButtons
-          createOrder={ createOrder}
-          onApprove={ onApprove }
+          createOrder={createOrder}
+          onApprove={onApprove}
         />
+      </div>
+
     </>
   )
 }

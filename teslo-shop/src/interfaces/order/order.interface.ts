@@ -31,5 +31,5 @@ interface ProductImage {
   
   export interface Order {
     OrderItem: OrderItem[];
-    OrderAddress: OrderAddress | null;
+    OrderAddress: OrderAddress;
   }
